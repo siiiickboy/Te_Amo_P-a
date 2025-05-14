@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interfaz con imágenes y música</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://img.freepik.com/fotos-premium/girasoles-marco-palabras-girasoles-sobre-fondo-negro_662214-175591.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      transition: background 0.5s ease-in-out;
+    }
+
+    #contenedor {
+      margin: 60px auto;
+      padding: 20px;
+      border: 3px solid rgb(145, 42, 99);
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .boton {
+      display: block;
+      margin: 10px auto;
+      padding: 0px;
+      font-size: 0px;
+      cursor: pointer;
+      border: 2px solid rgb(128, 0, 128);
+      color: white;
+      background-color: purple;
+      border-radius: 10px;
+      transition: all 0.3s;
+      width: 65%;
+    }
+
+    .boton:hover {
+      box-shadow: 0 0 15px purple;
+    }
+
+    #boton1 img, #boton2 img, #boton3 img, #boton4 img, #boton5 img {
+      width: 100%;
+      height: auto;
+      border: 3px solid rgb(195, 0, 255);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #boton1 img:hover, #boton2 img:hover, #boton3 img:hover, #boton4 img:hover, #boton5 img:hover {
+      box-shadow: 0 0 20px yellow;
+    }
+
+    #imagenFondo, #imagenFondo2, #imagenFondo3, #imagenFondo4, #imagenFondo5 {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    #imagenFondo { background-image: url('https://i.postimg.cc/W1kFcLs5/2imagen-jpg.jpg'); }
+    #imagenFondo2 { background-image: url('https://i.postimg.cc/0yHmLDh1/2-fondo-del-boton.jpg'); }
+    #imagenFondo3 { background-image: url('https://i.postimg.cc/76gZJNRF/Imagen-de-Whats-App-2025-04-06-a-las-14-10-06-ca462ea9.jpg'); }
+    #imagenFondo4 { background-image: url('https://i.postimg.cc/2S11gTPB/fondo4.jpg'); }
+    #imagenFondo5 { background-image: url('https://i.postimg.cc/kgynQ81C/fondo5.jpg'); }
+
+    #mensajeCaja, #mensajeCaja2, #mensajeCaja3, #mensajeCaja4, #mensajeCaja5 {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      color: black;
+      border: 2px solid white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      font-size: 22px;
+      z-index: 2;
+      overflow: hidden;
+      height: 300px;
+    }
+
+    #mensajeCaja3 a, #mensajeCaja4 a {
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes scroll-text {
+      0% { transform: translateY(20%); opacity: 1; }
+      100% { transform: translateY(-100%); opacity: 1; }
+    }
+
+    #mensajeCaja p, #mensajeCaja2 p, #mensajeCaja3 p, #mensajeCaja4 p, #mensajeCaja5 p {
+      position: relative;
+      animation: scroll-text 97s linear forwards;
+      white-space: pre-line;
+    }
+
+    #botonRegresar {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    #mensajeBloqueado {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 20px;
+      z-index: 3;
+    }
+
+    #enlaceFinal {
+      display: none;
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.6);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 10px;
+      z-index: 3;
+    }
+
+    #enlaceFinal a {
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<iframe id="player" width="0" height="0"
+    src="https://www.youtube.com/embed/drXHzoUUTw8?enablejsapi=1&autoplay=1&loop=1&playlist=drXHzoUUTw8&mute=1"
+    frameborder="0" allow="autoplay"></iframe>
+
+<div id="contenedor">
+  <button id="boton1" class="boton">
+    <img src="https://i.postimg.cc/m2mV1Rs8/1imagen-jpg.jpg" alt="Botón Imagen 1">
+  </button>
+  <button id="boton2" class="boton">
+    <img src="https://i.postimg.cc/PJrYgyfh/imagen-del-boton.jpg" alt="Botón Imagen 2">
+  </button>
+  <button id="boton3" class="boton">
+    <img src="https://i.postimg.cc/25bPKKjW/Imagen-de-Whats-App-2025-04-13-a-las-15-38-27-95ef601b.jpg" alt="Botón Imagen 3">
+  </button>
+  <button id="boton4" class="boton">
+    <img src="https://i.postimg.cc/wM121D1y/boton4.jpg" alt="Botón Imagen 4">
+  </button>
+  <button id="boton5" class="boton">
+    <img src="https://i.postimg.cc/qqQ0dH9F/boton5.jpg" alt="Botón Imagen 5">
+  </button>
+</div>
+
+<div id="imagenFondo"></div>
+<div id="mensajeCaja">
+  <p>"No te pido que confíes en mí al 100%, pero poco a poco te darás cuenta de que muero por ti, que solo quiero verte bien y hacerte feliz, hacerte reír siempre, estar contigo en tus peores momentos, celebrar cada escalón que des en tu vida, estar ahí a toda hora cuando más me necesites, y hacerte sentir que lo eres todo para mí... 💜💜MITCHELL💜💜"</p>
+</div>
+
+<div id="imagenFondo2"></div>
+<div id="mensajeCaja2">
+  <p>"Si supieras cuántas veces el cielo me ha escuchado pronunciar tu nombre  
+    entre oraciones secas y miradas vacías,  
+    sabrías que no todo lo que arde se ve.  
+    Desde que tus ojos se cruzaron con los míos,  
+    algo se rompió sin hacer ruido,  
+    como se rompe la última cuerda en un instrumento olvidado.  
+    No he dejado de avanzar,  
+    pero cada paso cruje como si cargara con nosotros a cuestas.  
+    pero ahí es donde erradica la fuerza de nuestro amor.  
+    en que no nos dejaremos sin importar los siglos que vengan  
+    yo siempre te tenderé mi mano y tomaré la tuya."</p>
+</div>
+
+<div id="imagenFondo3"></div>
+<div id="mensajeCaja3">
+  <p><a href="https://youtu.be/bhjqRmMaI1g?si=MEUPdo7Om7x_l2lh" target="_blank">En el amor hay mucho sufrimiento y bondad, no existe el orgullo, el amor tolera todo, cree en todo, espera todo y soporta todo. El amor nunca fracasa, y esas 3 cosas perduran, fe, esperanza y amor, pero la más grandiosa es el Amor. da Click sobre este mensaje Te Amo💜💜</a></p>
+</div>
+
+<div id="imagenFondo4"></div>
+<div id="mensajeCaja4">
+  <div id="mensajeBloqueado">Te amo PÍA hasta el final de mi vida.  Pd: Mitchell 💜💜💜💜</div>
+  <p><a href="https://www.youtube.com/watch?v=vPyZCxZVPx0&ab_channel=LYRICS%2FKILLKA" target="_blank">Te necesito más que nadie en este planeta, podría no necesitarte. Te necesito para que cuides de mi, para que me aguantes, y más que nada te necesito para que me ames porque yo te amo. Prefiero salvar nuestra relación las veces que sean necesarias, a comenzar desde cero con alguien que jamás amare como a ti 💜   ahora da clic en este mensaje amor y cierra tus ojos 💜.</a></p>
+</div>
+
+<div id="imagenFondo5"></div>
+<div id="mensajeCaja5">
+  <p>Mi amor, Hoy más que nunca quiero abrir mi corazón y decirte cuánto te amo y cuánto lamento haberte hecho daño con mis errores. Reconozco que he cometido errores imperdonables, pero también sé que eres lo más importante en mi vida. Estoy lleno de arrepentimiento y deseo sinceramente reparar cada grieta en nuestro amor. Quiero demostrarte que soy capaz de cambiar, de aprender de mis errores y de ser la persona que realmente te mereces. No hay nada en este mundo que desee más que volver a estar contigo, recuperar lo perdido y construir un futuro juntos donde cada día te haga más feliz. Eres mi todo, mi razón de ser, y haré todo lo que esté a mi alcance para merecer tu amor y tu perdón.
+    
+    Te amo con todo mi ser, y estaré aquí, dispuesto a trabajar en cada detalle, en cada momento, para demostrarte que valgo la pena y que nuestro amor es más fuerte que cualquier error. Por favor, dame la oportunidad de hacerte feliz de nuevo, de caminar juntos por el camino que sé que podemos construir con amor, paciencia y compromiso mutuo.
+    
+    Con todo mi amor y esperanza❤️
+  </p>
+</div>
+<div id="enlaceFinal">
+  <a href="https://www.youtube.com/watch?v=2xrIsBd-W8E&ab_channel=PEBBLESSALAZAR" target="_blank">
+    Te amo y esta vez espero sea para siempre💗💘 dame clic
+  </a>
+</div>
+
+<button id="botonRegresar">Regresar</button>
+
+<script>
+  function mostrarSeccion(imagenId, cajaId, extraFn = null) {
+    document.getElementById(imagenId).style.display = 'block';
+    document.getElementById(cajaId).style.display = 'block';
+    document.getElementById('botonRegresar').style.display = 'block';
+    if (extraFn) extraFn();
+  }
+
+  document.getElementById('boton1').addEventListener('click', () => mostrarSeccion('imagenFondo', 'mensajeCaja'));
+  document.getElementById('boton2').addEventListener('click', () => mostrarSeccion('imagenFondo2', 'mensajeCaja2'));
+  document.getElementById('boton3').addEventListener('click', () => mostrarSeccion('imagenFondo3', 'mensajeCaja3'));
+  document.getElementById('boton4').addEventListener('click', () => mostrarSeccion('imagenFondo4', 'mensajeCaja4'));
+  document.getElementById('boton5').addEventListener('click', () => {
+    mostrarSeccion('imagenFondo5', 'mensajeCaja5', () => {
+      document.getElementById('enlaceFinal').style.display = 'block';
+      const audio = new Audio("https://www.youtube.com/watch?v=2xrIsBd-W8E&ab_channel=PEBBLESSALAZAR");
+      // No se puede reproducir directamente desde YouTube por restricciones de navegador.
+    });
+  });
+
+  document.getElementById('botonRegresar').addEventListener('click', function () {
+    ['imagenFondo','imagenFondo2','imagenFondo3','imagenFondo4','imagenFondo5'].forEach(id => document.getElementById(id).style.display = 'none');
+    ['mensajeCaja','mensajeCaja2','mensajeCaja3','mensajeCaja4','mensajeCaja5'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('botonRegresar').style.display = 'none';
+    document.getElementById('enlaceFinal').style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
